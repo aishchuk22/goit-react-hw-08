@@ -1,0 +1,33 @@
+.card {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.card:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.deleteBtn {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: transform 100ms ease-in-out 50ms;
+}
+
+.deleteBtn:hover {
+  background-color: rgb(219, 232, 233);
+  box-shadow: 1px 1px 8px 1px rgb(200, 225, 236);
+  transform: scale(1.05);
+}
+
+.deleteBtn:active {
+  box-shadow: 1px 1px 4px 1px rgb(155, 156, 157);
+}
