@@ -1,8 +1,12 @@
 import { ErrorMessage, Formik, Field, Form } from "formik";
-import s from "./ContactForm.module.css";
-import * as Yup from "yup";
+import toast, { Toaster } from "react-hot-toast";
+import { IoIosContact } from "react-icons/io";
+import { MdLocalPhone } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsOps";
+import * as Yup from "yup";
+
+import { addContact } from "../../redux/contacts/operations";
+import s from "./ContactForm.module.css";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -13,6 +17,7 @@ const ContactForm = () => {
       ...values,
       })
     );
+    toast.success("Your contact was added successfully!");
     actions.resetForm();
   };
 
@@ -29,19 +34,24 @@ const ContactForm = () => {
         validationSchema={validationSchema}
       >
         <Form className={s.form}>
-          <label className={s.label}>
-            Name
-            <Field type='text' name='name' className={s.input} placeholder='E.g. John Snow'/>
+          <Toaster position="top-right" reverseOrder={false} />
+          
+          <label className="input validator">
+            <IoIosContact className={s.icon}/>
+            <Field type='text' name='name' placeholder='E.g. John Snow'/>
+          </label>
             <ErrorMessage name='name' className={s.error} component='p' />
+
+          <label className="input validator mt-5">
+            <MdLocalPhone className={s.icon}/>
+            <Field type='number' name='number' placeholder='123-456-7890'/>
           </label>
-          <label className={s.label}>
-            Number
-            <Field type='text' name='number' className={s.input} placeholder='123-456-7890'/>
             <ErrorMessage name='number' className={s.error} component='p' />
-          </label>
-          <button className={s.formBtn} type='submit'>
+
+          <button className="btn btn-success" type='submit'>
             Add contact
           </button>
+          
         </Form>
       </Formik>
     </div>

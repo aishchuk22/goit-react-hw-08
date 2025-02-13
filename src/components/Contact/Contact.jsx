@@ -1,29 +1,31 @@
-import s from './Contact.module.css'
 import { IoIosContact } from "react-icons/io";
 import { MdLocalPhone } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
 
-const Contact = ({ name, number, id }) => {
-  const dispatch = useDispatch();
+import s from './Contact.module.css'
 
+const Contact = ({ name, number, id, onDelete, onEdit }) => {
   return (
     <>
       <div>
-        <div className={s.card}>
+        <div className={s.container}>
           <IoIosContact className={s.icon} />
-          <p className={s.name}>{name}</p>{" "}
+          <p className={s.name}>{name}</p>
         </div>
-        <div className={s.card}>
+        <div className={s.container}>
           <MdLocalPhone className={s.icon} />
-          <p className={s.number}>{number}</p>
+          <p className={s.tel}>{number}</p>
         </div>
       </div>
-      <button className={s.deleteBtn} onClick={() => dispatch(deleteContact(id))}>
-        Delete
-      </button>
+      <div className={s.btn}>
+        <button className="btn btn-warning w-12 h-5" onClick={() => onEdit(id)}>
+          Edit
+        </button>
+        <button className="btn btn-error w-12 h-5" onClick={() => onDelete(id)}>
+          Delete
+        </button>
+      </div>
     </>
   );
 };
 
-export default Contact
+export default Contact;

@@ -1,0 +1,25 @@
+.header {
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
+.link {
+  color: #fff;
+  font-size: 26px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.active {
+  color: #493566;
+  text-decoration: underline;
+  pointer-events: none;
+}
