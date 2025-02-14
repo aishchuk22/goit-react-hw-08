@@ -19,7 +19,7 @@ const ContactForm = () => {
         ...values,
       })
     );
-    toast.success("Contact added!");
+    toast.success("Contact was added!");
     actions.resetForm();
   };
 
@@ -44,7 +44,7 @@ const ContactForm = () => {
           </label>
           <ErrorMessage name="name" className={s.error} component="p" />
 
-          <label className="input validator mt-2">
+          <label className="input validator mt-3">
             <MdPhoneAndroid className="w-4 h-4 p-0"/>
             <Field type="number" name="number" placeholder="+38 (012) 345-67-89" className="input-bordered [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
           </label>

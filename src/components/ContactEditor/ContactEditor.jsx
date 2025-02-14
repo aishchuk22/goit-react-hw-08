@@ -55,7 +55,6 @@ const ContactEditor = ({ onClose }) => {
                 type="text"
                 onChange={e => setName(e.target.value)}
                 placeholder="Name"
-                className="pl-1"
                 value={name}
               />
             </label>
