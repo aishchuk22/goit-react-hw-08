@@ -1,19 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 
-import { selectContactId, selectOpenModal } from "../../redux/confirmationModal/selectors";
-import { selectIsError, selectIsLoading } from "../../redux/contacts/selectors";
-import { closeModal } from "../../redux/confirmationModal/slice";
-import { deleteContact } from "../../redux/contacts/operations";
-
 import s from "./ConfirmationModal.module.css";
 
-const ConfirmationModal = () => {
+import { selectIsError, selectIsLoading } from "../../redux/contacts/selectors";
+import { selectContactId, selectOpenModal } from "../../redux/modal/selectors";
+import { deleteContact } from "../../redux/contacts/operations";
+import { closeModal } from "../../redux/modal/slice";
 
+const ConfirmationModal = () => {
   const dispatch = useDispatch();
 
-  const contactId = useSelector(selectContactId);
   const openModal = useSelector(selectOpenModal);
+  const contactId = useSelector(selectContactId);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
 
@@ -22,7 +21,7 @@ const ConfirmationModal = () => {
     if (!isError) {
       dispatch(closeModal());
     }
-    toast.success("This contact is deleted!");
+    toast.success("The contact was deleted!");
   };
 
   const handleCancel = () => {
@@ -36,25 +35,25 @@ const ConfirmationModal = () => {
   return (
     <div className={s.modal}>
       <div className={s.content}>
-        <p className={s.text}>Does this contact deserve to be deleted like that?</p>
+        <p className={s.text}>Are you sure this contact deserves to be deleted?</p>
         {isError && <h2>Oops...Something went wrong!</h2>}
         {isLoading ? (
           <button className="btn">
             <span className="loading loading-spinner"></span>
-            Please wait...
+            Loading...
           </button>
         ) : (
           <div className={s.btn}>
-            <button className="btn btn-success" onClick={handleConfirm}>
-              Yes
+            <button className="btn btn-success w-20 font-bold" onClick={handleConfirm}>
+              ✔Yup
             </button>
-            <button className="btn btn-error" onClick={handleCancel}>
-              Nope
+            <button className="btn btn-error w-20 font-bold" onClick={handleCancel}>
+              ❌Nope
             </button>
           </div>
         )}
       </div>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" />
     </div>
   );
 };

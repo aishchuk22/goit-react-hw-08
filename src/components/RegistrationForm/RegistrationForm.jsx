@@ -1,20 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import { register } from "../../redux/auth/operations";
 
-
 const RegistrationForm = () => {
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-    
   const initialValues = {
     name: "",
     email: "",
     password: "",
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (values, options) => {
     dispatch(register(values))
@@ -24,40 +22,38 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div>
+    <div className="card bg-base-300 w-full max-w-sm shrink-0 shadow-2xl ml-auto mr-auto mt-8">
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className="min-h-screen flex flex-col mt-20  items-center">
-          <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
-            <legend className="fieldset-legend">Register</legend>
-            <label className="fieldset-label flex flex-col items-start">
-              <span>Name:</span>
-              <Field className="input" name="name" placeholder="Name" />
+        <Form className="card-body">
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text mb-2">Name:</span>
             </label>
-            <label className="fieldset-label flex flex-col items-start">
-              <span>Email:</span>
-              <Field
-                className="input"
-                name="email"
-                type="email"
-                placeholder="Email"
-              />
+            <Field className="input input-bordered" type="text" name="name" placeholder="John Snow" />
+          </div>
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text mb-2">Email:</span>
             </label>
-            <label className="fieldset-label flex flex-col items-start">
-              <span>Password:</span>
-              <Field
-                className="input"
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
+            <Field className="input input-bordered" type="email" name="email" placeholder="johnsnow@mail.com" />
+          </div>
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text mb-2">Password:</span>
             </label>
-            <button className="btn btn-neutral mt-4" type="submit">
-              Register
-            </button>
-            <Link to="/login" className="link link-hover">
+            <Field className="input input-bordered" type="password" name="password" placeholder="Password" />
+          </div>
+
+          <div className="form-control mt-3 mr-auto ml-auto">
+          <button className="btn btn-primary w-50" type="submit">Register</button>
+          </div>
+
+          <Link to="/login" className="link link-hover mr-auto ml-auto">
               Already have an account?
-            </Link>
-          </fieldset>
+          </Link>
         </Form>
       </Formik>
     </div>

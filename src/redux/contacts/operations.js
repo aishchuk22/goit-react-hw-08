@@ -14,6 +14,18 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
+export const deleteContact = createAsyncThunk(
+  "contacts/deleteContact",
+  async (id, thunkAPI) => {
+    try {
+      const res = await goitApi.delete(`/contacts/${id}`);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
 export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (body, thunkAPI) => {
@@ -31,21 +43,9 @@ export const editContact = createAsyncThunk(
   async ({ id, name, number }, thunkAPI) => {
     try {
       const res = await goitApi.patch(`/contacts/${id}`, {
-        name,
-        number,
+        name: name,
+        number: number,
       });
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
-  }
-);
-
-export const deleteContact = createAsyncThunk(
-  "contacts/deleteContact",
-  async (id, thunkAPI) => {
-    try {
-      const res = await goitApi.delete(`/contacts/${id}`);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

@@ -21,36 +21,31 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="card bg-base-300 w-full max-w-sm shrink-0 shadow-2xl ml-auto mr-auto mt-8">
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className="min-h-screen flex flex-col mt-20 items-center">
-          <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
-            <legend className="fieldset-legend">Login</legend>
-            <label className="fieldset-label flex flex-col items-start">
-              <span>Email:</span>
-              <Field
-                className="input"
-                name="email"
-                type="email"
-                placeholder="Email"
-              />
+        <Form className="card-body">
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text mb-2">Email:</span>
             </label>
-            <label className="fieldset-label flex flex-col items-start">
-              <span>Password:</span>
-              <Field
-                className="input"
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
+            <Field className="input input-bordered" type="email" name="email" placeholder="johnsnow@mail.com" />
+          </div>
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text mb-2">Password:</span>
             </label>
-            <button className="btn btn-neutral mt-4" type="submit">
-              Login
-            </button>
-            <Link to="/register" className="link link-hover">
-              Create new account
-            </Link>
-          </fieldset>
+            <Field className="input input-bordered" type="password" name="password" placeholder="Password" />
+          </div>
+
+          <div className="form-control mt-3 mr-auto ml-auto">
+          <button className="btn btn-primary w-50" type="submit">Login</button>
+          </div>
+
+          <Link to="/register" className="link link-hover mr-auto ml-auto">
+              Create new account!
+          </Link>
         </Form>
       </Formik>
     </div>

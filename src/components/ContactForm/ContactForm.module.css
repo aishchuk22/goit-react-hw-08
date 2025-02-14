@@ -17,55 +17,6 @@
 .error {
   color: red;
   list-style-type: armenian;
+  margin-top: 4px;
+  font-style: italic;
 }
-
-/* .form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid black;
-  padding: 10px 16px;
-  width: 320px;
-  border-radius: 10px;
-  margin: 0 auto;
-  box-shadow: 1px 1px 8px 2px lightgray;
-}
-
-.error {
-  color: red;
-  list-style-type: armenian;
-}
-
-.label {
-  width: 100%;
-  display: flex;
-  gap: 4px;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.formBtn {
-  padding: 8px;
-  margin-top: 8px;
-  border: 1 solid lightgray;
-  cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid;
-}
-
-.formBtn:hover {
-  background-color: rgb(219, 232, 233);
-  box-shadow: 1px 1px 8px 1px rgb(200, 225, 236);
-}
-
-.formBtn:active {
-  box-shadow: 1px 1px 4px 1px rgb(155, 156, 157);
-}
-
-.input {
-  height: 36px;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid;
-} */

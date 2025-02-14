@@ -1,4 +1,7 @@
+import { contactsReducer } from "./contacts/slice";
 import { configureStore } from "@reduxjs/toolkit";
+import { filtersReducer } from "./filters/slice";
+import { authReducer } from "./auth/slice";
 import {
   persistStore,
   persistReducer,
@@ -10,11 +13,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { modalReducer } from "./modal/slice";
 
-import { contactsReducer } from "./contacts/slice";
-import { filtersReducer } from "./filters/slice";
-import { modalReducer } from "./confirmationModal/slice";
-import { authReducer } from "./auth/slice";
 
 const persistConfig = {
   key: "auth-data",
@@ -32,6 +32,7 @@ export const store = configureStore({
     auth: persistedReducer,
     modal: modalReducer,
   },
+  
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

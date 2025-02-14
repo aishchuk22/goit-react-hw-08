@@ -1,57 +1,60 @@
-import { ErrorMessage, Formik, Field, Form } from "formik";
-import toast, { Toaster } from "react-hot-toast";
-import { IoIosContact } from "react-icons/io";
-import { MdLocalPhone } from "react-icons/md";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 
+import { LuContactRound } from "react-icons/lu";
+import { MdPhoneAndroid } from "react-icons/md";
+
 import { addContact } from "../../redux/contacts/operations";
+import toast, { Toaster } from "react-hot-toast";
 import s from "./ContactForm.module.css";
 
 const ContactForm = () => {
+
   const dispatch = useDispatch();
-  
+
   const handleSubmit = (values, actions) => {
     dispatch(
       addContact({
-      ...values,
+        ...values,
       })
     );
-    toast.success("Your contact was added successfully!");
+    toast.success("Contact added!");
     actions.resetForm();
   };
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().min(3).max(50).required(),
-    number: Yup.string().min(3).max(50).required(),
+  const registerSchema = Yup.object().shape({
+    name: Yup.string().min(3).max(40).required("Please, enter a name"),
+    number: Yup.string().min(3).max(40).required("Please, enter a valid phone number"),
   });
 
   return (
-    <div>
+    <div className="bg-[rgb(237,251,255)]">
       <Formik
         onSubmit={handleSubmit}
-        initialValues={{ name: '', number: '' }}
-        validationSchema={validationSchema}
+        initialValues={{ name: "", number: "" }}
+        validationSchema={registerSchema}
       >
         <Form className={s.form}>
-          <Toaster position="top-right" reverseOrder={false} />
-          
+          <Toaster position="top-center" />
+
           <label className="input validator">
-            <IoIosContact className={s.icon}/>
-            <Field type='text' name='name' placeholder='E.g. John Snow'/>
+            <LuContactRound className="w-4 h-4 p-0"/>
+            <Field type="text" name="name" placeholder="Peter Parker" className="input-bordered" />
           </label>
-            <ErrorMessage name='name' className={s.error} component='p' />
+          <ErrorMessage name="name" className={s.error} component="p" />
 
-          <label className="input validator mt-5">
-            <MdLocalPhone className={s.icon}/>
-            <Field type='number' name='number' placeholder='123-456-7890'/>
+          <label className="input validator mt-2">
+            <MdPhoneAndroid className="w-4 h-4 p-0"/>
+            <Field type="number" name="number" placeholder="+38 (012) 345-67-89" className="input-bordered [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
           </label>
-            <ErrorMessage name='number' className={s.error} component='p' />
+          <ErrorMessage name="number" className={s.error} component="p" />
 
-          <button className="btn btn-success" type='submit'>
-            Add contact
-          </button>
-          
+          <div className="mt-5">
+            <button className="btn btn-success font-bold" type="submit">
+              Add contact
+            </button>
+          </div>
         </Form>
       </Formik>
     </div>

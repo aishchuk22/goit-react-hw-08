@@ -1,19 +1,26 @@
 .container {
   display: flex;
+  align-items: center;
+}
+
+.container:first-child {
+  margin-bottom: 8px;
 }
 
 .name {
-  margin-left: 10px;
-  margin-bottom: 10px;
+  margin-left: 8px;
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .tel {
-  margin-left: 10px;
+  margin-left: 8px;
+  font-style: italic;
 }
 
 .btn {
-  font-size: small;
-  display: flex;
   flex-direction: column;
+  font-size: 12px;
+  display: flex;
   gap: 5px;
 }

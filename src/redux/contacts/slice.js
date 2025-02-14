@@ -1,69 +1,62 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-
 import {
-    deleteContact,
-    fetchContacts,
-    editContact,
-    addContact,
+  addContact,
+  deleteContact,
+  editContact,
+  fetchContacts,
 } from "./operations";
 import { logOut } from "../auth/operations";
 
-
 const initialState = {
-  items: [],
+  editingContact: null,
   isLoading: false,
   isError: false,
-  editedContact: null,
+  items: [],
 };
 
 const slice = createSlice({
   name: "contacts",
-    initialState,
-  
-    reducers: {
-    setEditedContact: (state, action) => {
-      state.editedContact = action.payload;
-        },
-    clearEditedContact: (state) => {
-      state.editedContact = null;
-        },
+  initialState,
+  reducers: {
+    setEditingContact: (state, action) => {
+      state.editingContact = action.payload;
     },
-    
-    extraReducers: builder => {
-      builder
+    clearEditingContact: state => {
+      state.editingContact = null;
+    },
+  },
+
+  extraReducers: builder => {
+    builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload;
         state.isLoading = false;
       })
-      
+
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          item => item.id !== action.payload.id
-        );
-        state.editedContact = null;
+        state.items = state.items.filter(item => item.id !== action.payload.id);
+        state.editingContact = null;
         state.isLoading = false;
       })
-          
-      .addCase(editContact.fulfilled, (state, action) => {
-        const index = state.items.findIndex(
-          item => item.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.items[index] = action.payload;
-        }
-        state.editedContact = null;
-        state.isLoading = false;
-      })
-          
+
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
         state.isLoading = false;
       })
-          
+
+      .addCase(editContact.fulfilled, (state, action) => {
+        const index = state.items.findIndex(item => item.id === action.payload.id);
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+        state.isLoading = false;
+        state.editingContact = null;
+      })
+
       .addCase(logOut.fulfilled, () => {
         return initialState;
       })
-          
+
       .addMatcher(
         isAnyOf(
           fetchContacts.pending,
@@ -76,8 +69,8 @@ const slice = createSlice({
           state.isLoading = true;
           state.isError = false;
         }
-      )
-          
+    )
+      
       .addMatcher(
         isAnyOf(
           fetchContacts.rejected,
@@ -95,4 +88,5 @@ const slice = createSlice({
 });
 
 export const contactsReducer = slice.reducer;
-export const { setEditedContact, clearEditedContact } = slice.actions;
+
+export const { setEditingContact, clearEditingContact } = slice.actions;

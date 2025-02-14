@@ -1,13 +1,13 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
-import ContactEdit from "../ContactEdit/ContactEdit";
+import ContactEditor from "../ContactEditor/ContactEditor";
 import Contact from "../Contact/Contact";
 import s from "./ContactList.module.css";
 
-import { openModal } from "../../redux/confirmationModal/slice";
-import { setEditedContact } from "../../redux/contacts/slice";
+import { setEditingContact } from "../../redux/contacts/slice";
+import { openModal } from "../../redux/modal/slice";
 import {
   selectEditingContact,
   selectFilteredContacts,
@@ -15,22 +15,22 @@ import {
 
 const ContactList = () => {
 
-  const editedContact = useSelector(selectEditingContact);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const editingContact = useSelector(selectEditingContact);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
   const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
 
-   const handleModal = id => {
+  const handleModal = id => {
     dispatch(openModal(id));
   };
 
-   const closeModal = () => {
-    setIsModalOpen(false);
+  const handleCloseModal = () => {
+    setIsEditorOpen(false);
   };
 
   const handleEdit = contact => {
-    dispatch(setEditedContact(contact.id));
-    setIsModalOpen(true);
+    dispatch(setEditingContact(contact.id));
+    setIsEditorOpen(true);
   };
 
   return (
@@ -49,8 +49,8 @@ const ContactList = () => {
         ))}
       </ul>
 
-      {isModalOpen && editedContact && (
-        <ContactEdit onClose={closeModal} />
+      {isEditorOpen && editingContact && (
+        <ContactEditor onClose={handleCloseModal} />
       )}
       <ConfirmationModal />
     </>

@@ -1,7 +1,7 @@
 import { IoIosContact } from "react-icons/io";
 import { MdLocalPhone } from "react-icons/md";
 
-import s from './Contact.module.css'
+import s from "./Contact.module.css";
 
 const Contact = ({ name, number, id, onDelete, onEdit }) => {
   return (
@@ -17,11 +17,11 @@ const Contact = ({ name, number, id, onDelete, onEdit }) => {
         </div>
       </div>
       <div className={s.btn}>
-        <button className="btn btn-warning w-12 h-5" onClick={() => onEdit(id)}>
-          Edit
+        <button className="btn w-15 h-5.5 italic p-0 pr-1 border-1 border-gray-500" onClick={() => onEdit(id)}>
+          ✒Edit
         </button>
-        <button className="btn btn-error w-12 h-5" onClick={() => onDelete(id)}>
-          Delete
+        <button className="btn btn-error w-15 h-5.5 italic p-0 pr-0.5 border-1 border-gray-500" onClick={() => onDelete(id)}>
+          ❌Delete
         </button>
       </div>
     </>
