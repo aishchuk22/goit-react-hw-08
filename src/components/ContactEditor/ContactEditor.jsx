@@ -45,7 +45,7 @@ const ContactEditor = ({ onClose }) => {
   return (
     <Formik>
       <Form className={s.form} onSubmit={handleSubmit}>
-        <Toaster position="top-right" />
+        <Toaster position="top-center" />
 
         <div className={s.content}>
           <div className="flex flex-col items-center gap-3">
