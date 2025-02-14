@@ -34,7 +34,7 @@ const ContactEditor = ({ onClose }) => {
       dispatch(editContact({ id: editingContact.id, name, number }));
       onClose();
     }
-    toast.success(`Contact ${name} was successfully edited!`);
+    toast.success(`Contact "${name}" was successfully edited!`);
   };
 
   const handleClose = () => {
